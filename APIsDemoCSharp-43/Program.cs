@@ -1,7 +1,6 @@
+using Newtonsoft.Json.Linq;
 ﻿
 //Create an instance of HTTPClient, this is what actually makes the api call
-using Newtonsoft.Json.Linq;
-
 var client = new HttpClient();
 
 //Build an api url from where the api call comes from
