@@ -11,7 +11,6 @@ var kanyeURL = "https://api.kanye.rest/";
 //Send a GET request to the url created above, this is going to give us back a string of json
 var kanyeResponse =client.GetStringAsync(kanyeURL).Result;
 
-
 //Parse the JSON response we just got back into JOject, we do this so we can access certain pieces of the JSON
 //In this case we will be getting the value of "quote" which we be will actual quote itself and the whole JSON body
 //Without ToString() it will be of type JToken, so we could never use it as a string
@@ -19,3 +18,14 @@ var kanyeResponse =client.GetStringAsync(kanyeURL).Result;
 var kanyeQuote = JObject.Parse(kanyeResponse)["quote"].ToString();
 
 Console.WriteLine(kanyeQuote);
+
+//using api key section
+
+//Grab appsettings file
+var appsettingsText = File.ReadAllText("appsettings.json");
+
+//Get the api key from the appseetings file using it's name "apiKey"
+var apiKey = JObject.Parse(appsettingsText).GetValue("apiKey").ToString();
+
+//Build the api url using the provided params you chose (I chose the zip code option) along with the api key
+var apiURL = $"http://api.openweathermap.org/data/2.5/weather?zip=35091&appid={apiKey}&units=imperial";
